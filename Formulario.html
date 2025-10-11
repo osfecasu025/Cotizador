@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Generador de cotización Celeus</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="dot"></div>
+      <h1>Generador cotización</h1>
+    </header>
+
+    <div class="grid">
+      <!-- Panel izquierdo (flujo escalonado) -->
+      <div class="left">
+        <!-- Paso 1: Proyecto -->
+        <section class="card" id="step1">
+          <h2>Buscador</h2>
+          <label>Seleccione el proyecto que desea cotizar</label>
+          <div class="spacer"></div>
+          <select id="sel-proyecto">
+            <option value="" selected>— Seleccionar —</option>
+            <option value="Canarias">Canarias</option>
+            <option value="Nogales">Nogales</option>
+            <option value="Dehesa">Dehesa</option>
+          </select>
+          <div class="spacer"></div>
+          <button id="btn-buscar" class="btn block">Buscar</button>
+        </section>
+
+        <!-- Paso 2A: Etapas -->
+        <section class="card hidden" id="step-etapas">
+          <h2>Etapas del proyecto</h2>
+          <label>Seleccione la etapa</label>
+          <div class="spacer"></div>
+          <select id="sel-etapas">
+            <option value="" selected>— Seleccionar —</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </section>
+
+        <!-- Paso 2B: Torres -->
+        <section class="card hidden" id="step-torres">
+          <h2>Cantidad de torres</h2>
+          <label>Seleccione el número de torres</label>
+          <div class="spacer"></div>
+          <select id="sel-torres">
+            <option value="" selected>— Seleccionar —</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </section>
+
+        <!-- Paso 2C: Tipo + Unidad (en la misma sección aparece el segundo select) -->
+        <section class="card hidden" id="step-tipo">
+          <h2>Tipo de edificio</h2>
+          <label>Seleccione el tipo</label>
+          <div class="spacer"></div>
+          <select id="sel-tipo">
+            <option value="" selected>— Seleccionar —</option>
+            <option value="Apartamento">Apartamento</option>
+            <option value="Penthouse">Penthouse</option>
+          </select>
+
+          <!-- Campo dinámico: Unidad (aparece debajo cuando hay tipo) -->
+          <div id="wrap-unidad" class="hidden">
+            <div class="spacer"></div>
+            <label>Seleccione la unidad</label>
+            <div class="spacer"></div>
+            <select id="sel-unidad"></select>
+          </div>
+        </section>
+
+        <!-- Paso 3 (antes “step2”): Generación de la cotización -->
+        <section class="card hidden" id="step-contenido">
+          <h2>Generación de la cotización</h2>
+          <div class="checks">
+            <label class="item"><input id="chk-presentacion" type="checkbox"> Presentación</label>
+            <label class="item"><input id="chk-ubi-proy" type="checkbox"> Ubicación del proyecto</label>
+            <label class="item"><input id="chk-actividades" type="checkbox"> Actividades del proyecto</label>
+            <label class="item"><input id="chk-ubi-apto" type="checkbox"> Ubicación del apartamento</label>
+            <label class="item"><input id="chk-cotizacion" type="checkbox"> Cotización</label>
+          </div>
+          <div class="spacer"></div>
+          <button id="btn-generar" class="btn block">Generar Cotización</button>
+        </section>
+      </div>
+
+      <!-- Panel derecho: vista previa PDF -->
+      <div class="right">
+        <section class="card">
+          <div class="toolbar">
+            <small style="color:var(--muted)">Pre-visualización</small>
+            <div class="tools">
+              <label class="inline">
+                <input id="chk-per-page" type="checkbox" checked>
+                1 sección por hoja
+              </label>
+              <button id="btn-descargar" class="btn">Descargar PDF</button>
+            </div>
+          </div>
+
+          <div id="pdf" class="pdf-doc">
+            <div class="pdf-page">
+              <div class="brand row-between">
+                <span>Ficha del proyecto</span><span id="pdf-nombre"></span>
+              </div>
+              <div class="section">
+                <div style="color:var(--muted)">
+                  Sigue el flujo de la izquierda y pulsa <b>Generar cotización</b>.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Librerías -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+
+  <!-- App -->
+  <script src="app.js"></script>
+</body>
+</html>
