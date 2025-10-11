@@ -8,7 +8,7 @@ const CONFIG = {
 Durante nuestra última conversación, usted señaló la importancia de contar con espacios funcionales y una ubicación estratégica, aspectos que este proyecto cumple de manera destacada.`
     },
 
-    ubicacionProy: { img: 'planta_canarias.jpg', caption: 'Cra 1 # 2–34, Barrio Centro – Ciudad' },
+    ubicacionProy: { img: 'planta_canarias.JPG', caption: 'Cra 1 # 2–34, Barrio Centro – Ciudad' },
     actividades: [
       { Zona: 'Zona BBQ', estado: 'Completado' },
       { Zona: 'Gimnasio', estado: 'En curso' },
@@ -48,7 +48,7 @@ Durante nuestra última conversación, usted señaló la importancia de contar c
       img: 'LOGO_NOGALES.JPG', caption: n => `Un gusto presentarle ${n}.
 Recuerdo que cuando conversamos, usted mencionó que le interesaba conocer más detalles sobre las zonas comunes y las opciones de financiación disponibles.`
     },
-    ubicacionProy: { img: '04.jpg', caption: 'Av. Nogales 123 – Sector Norte' },
+    ubicacionProy: { img: 'planta_nogal.jpg', caption: 'Av. Nogales 123 – Sector Norte' },
     actividades: [
       { Zona: 'Salón social', estado: 'Programado' },
       { Zona: 'Bar', estado: 'Completado' },
@@ -86,7 +86,7 @@ Recuerdo que cuando conversamos, usted mencionó que le interesaba conocer más 
       img: 'LOGO_DEHESA.JPG', caption: n => `Es un placer presentarle el proyecto ${n}.
 Durante nuestra conversación, usted manifestó interés en las áreas sociales y el diseño de las viviendas, por lo que quisimos resaltarlas en esta presentación.`
     },
-    ubicacionProy: { img: 'planta_dehesa.jpg', caption: 'Calle 45 # 10–22, Dehesa' },
+    ubicacionProy: { img: 'planta_dehesa.JPG', caption: 'Calle 45 # 10–22, Dehesa' },
     actividades: [
       { Zona: 'Zona BBQ', estado: 'Completado' },
       { Zona: 'Gimnasio', estado: 'En curso' },
@@ -501,4 +501,5 @@ document.getElementById('btn-descargar').addEventListener('click', async () => {
     document.getElementById('pdf').classList.remove('__export');
   }
 });
+
 
