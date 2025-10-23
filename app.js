@@ -4,7 +4,7 @@ const CONFIG = {
       img: 'Img/LOGO_CANARIAS.JPG',
       caption: n => `Bienvenido a ${n} Club Condominio,  un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo “Todo Incluido”, combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
     },
-    ubicacionProy: { img: 'Img/planta_canarias.jpg', caption: 'Cra 1 # 2–34, Barrio Centro – Ciudad' },
+    ubicacionProy: { img: 'Img/planta_canarias.JPG', caption: 'Cra 1 # 2–34, Barrio Centro – Ciudad' },
     actividades: [
       { Zona: 'Zona BBQ', estado: 'Completado' },
       { Zona: 'Gimnasio', estado: 'En curso' },
@@ -45,7 +45,7 @@ const CONFIG = {
     presentacion: { img: 'Img/LOGO_DEHESA.JPG',
       caption: n => `Bienvenido a ${n} Club Condominio,  un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo “Todo Incluido”, combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
       },
-    ubicacionProy: { img: 'Img/planta_dehesa.jpg', caption: 'Calle 45 # 10–22, Dehesa' },
+    ubicacionProy: { img: 'Img/planta_dehesa.JPG', caption: 'Calle 45 # 10–22, Dehesa' },
     actividades: [{ Zona: 'Zona BBQ', estado: 'Completado' }],
     ubicacionApto: { img: 'Img/Tipo1dehesa.PNG', caption: 'Torre C – Piso 7 – Apto 702' },
     cotizacionDet: {
@@ -596,4 +596,5 @@ document.getElementById('btn-descargar').addEventListener('click', async () => {
     if (off && off.parentNode) off.parentNode.removeChild(off);
   }
 });
+
 
