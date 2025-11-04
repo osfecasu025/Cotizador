@@ -25,27 +25,30 @@
         <section class="card" id="step-ident">
           <h2>Datos de cotización</h2>
 
-          <label for="inp-cliente">Nombre completo del cliente</label>
+          <label for="cliente-nombre">Nombre completo del cliente</label>
           <input id="cliente-nombre" type="text" placeholder="Ingrese el nombre completo del cliente" />
 
           <label for="ejecutivo-nombre">Nombre completo del ejecutivo</label>
           <input id="ejecutivo-nombre" type="text" placeholder="Ingrese el nombre completo del ejecutivo" />
 
-          <label for="inp-ejecutivo-email">Correo electrónico del ejecutivo</label>
+          <label for="ejecutivo-email">Correo electrónico del ejecutivo</label>
           <input id="ejecutivo-email" type="email" placeholder="Ejemp: prueba@ejemplo.com" />
 
-          <label for="inp-ejecutivo-phone">Número de celular del ejecutivo</label>
+          <label for="ejecutivo-cel">Número de celular del ejecutivo</label>
           <input id="ejecutivo-cel" type="tel" placeholder="Ejemp: 3006527890" />
 
-          <label for="inp-ejecutivo-photo">Firma del ejecutivo</label>
+          <label for="ejecutivo-foto">Firma del ejecutivo</label>
           <input id="ejecutivo-foto" type="file" accept="image/*" />
-          <div id="preview-ejecutivo" class="img-preview hidden" aria-hidden="true"></div>
+          
         </section>
 
 
         <section class="card" id="step1">
           <h2>Buscador</h2>
-          <label for="sel-proyecto">Seleccione el proyecto que desea cotizar</label>
+          <label for="sel-proyecto">
+            Seleccione el proyecto que desea cotizar
+            <span class="tooltip-trigger" data-tooltip="Los siguientes pasos se resetearán automáticamente si seleccionas otro proyecto">💡</span>
+          </label>
           <div class="spacer"></div>
           <select id="sel-proyecto">
             <option value="" selected>— Seleccionar —</option>
