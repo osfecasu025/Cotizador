@@ -1,8 +1,9 @@
+// ==================== CONFIGURATION ====================
 const CONFIG = {
   Canarias: {
     presentacion: {
       img: 'Img/LOGO_CANARIAS.JPG',
-      caption: n => `Bienvenido a ${n} Club Condominio,  un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo “Todo Incluido”, combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
+      caption: n => `Bienvenido a ${n} Club Condominio, un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo "Todo Incluido", combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
     },
     ubicacionProy: { img: 'Img/planta_canarias.JPG', caption: 'Cra 1 # 2–34, Barrio Centro – Ciudad' },
     actividades: [
@@ -28,252 +29,539 @@ const CONFIG = {
     ],
   },
   Nogales: {
-    presentacion: { img: 'Img/LOGO_NOGALES.JPG', 
-      caption: n => `Bienvenido a ${n} Club Condominio,  un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo “Todo Incluido”, combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
+    presentacion: { 
+      img: 'Img/LOGO_NOGALES.JPG', 
+      caption: n => `Bienvenido a ${n} Club Condominio, un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo "Todo Incluido", combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
     },
     ubicacionProy: { img: 'Img/planta_nogal.jpg', caption: 'Av. Nogales 123 – Sector Norte' },
     actividades: [{ Zona: 'Salón social', estado: 'Programado' }],
     ubicacionApto: { img: 'Img/Tipo1nogales.PNG', caption: 'Torre B – Piso 3 – Apto 304' },
     cotizacionDet: {
-      valorApartamento: 315000000, beneficioPrograma: '', valorHoy: 315000000,
-      cuotaInicialPct: 30, separacion: 2000000, meses: 120, cuotaMensual: 1452000,
-      lineaProducto: 'Leasing habitacional', vigenciaTexto: '30 días'
+      valorApartamento: 315000000,
+      beneficioPrograma: '',
+      valorHoy: 315000000,
+      cuotaInicialPct: 30,
+      separacion: 2000000,
+      meses: 120,
+      cuotaMensual: 1452000,
+      lineaProducto: 'Leasing habitacional',
+      vigenciaTexto: '30 días'
     },
     cotizacion: [{ concepto: 'Apartamento 60 m²', valor: 280000000 }]
   },
   Dehesa: {
-    presentacion: { img: 'Img/LOGO_DEHESA.JPG',
-      caption: n => `Bienvenido a ${n} Club Condominio,  un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo “Todo Incluido”, combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
-      },
+    presentacion: { 
+      img: 'Img/LOGO_DEHESA.JPG',
+      caption: n => `Bienvenido a ${n} Club Condominio, un proyecto de apartamentos NO VIS en Cúcuta, el primer proyecto residencial que se construirá en Ciudad Viva, una zona diseñada para el futuro. Aquí vivirás al estilo "Todo Incluido", combinando confort, tecnología y entretenimiento en un entorno seguro y pensado para compartir con quienes más amas diseñado bajo el concepto de ciudad dentro de ciudad.`
+    },
     ubicacionProy: { img: 'Img/planta_dehesa.JPG', caption: 'Calle 45 # 10–22, Dehesa' },
     actividades: [{ Zona: 'Zona BBQ', estado: 'Completado' }],
     ubicacionApto: { img: 'Img/Tipo1dehesa.PNG', caption: 'Torre C – Piso 7 – Apto 702' },
     cotizacionDet: {
-      valorApartamento: 315000000, beneficioPrograma: '', valorHoy: 315000000,
-      cuotaInicialPct: 30, separacion: 2000000, meses: 120, cuotaMensual: 1452000,
-      lineaProducto: 'Leasing habitacional', vigenciaTexto: '30 días'
+      valorApartamento: 315000000,
+      beneficioPrograma: '',
+      valorHoy: 315000000,
+      cuotaInicialPct: 30,
+      separacion: 2000000,
+      meses: 120,
+      cuotaMensual: 1452000,
+      lineaProducto: 'Leasing habitacional',
+      vigenciaTexto: '30 días'
     },
     cotizacion: [{ concepto: 'Apartamento 60 m²', valor: 280000000 }]
   }
 };
-// ===============================================================
 
-// UNIDADES y utilidades (sin cambios)
 const UNIDADES = {
   Apartamento: ['Apto 301', 'Apto 502', 'Apto 702'],
   Penthouse: ['PH 1', 'PH 2']
 };
 
-const $ = s => document.querySelector(s);
-const state = { proyecto: '', nombre: '', etapas: '', torres: '', tipo: '', unidad: '' };
+const VALIDATION_RULES = {
+  name: {
+    maxLength: 100,
+    pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
+    message: 'Solo se permiten letras, espacios, ñ y acentos'
+  },
+  email: {
+    maxLength: 100,
+    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    message: 'Ingrese un correo electrónico válido (ejemplo@dominio.com)'
+  },
+  phone: {
+    length: 10,
+    pattern: /^[0-9]{10}$/,
+    message: 'Ingrese un número de celular válido (10 dígitos)'
+  }
+};
 
-// ---------- Helpers UI ----------
-function h3(text) { const el = document.createElement('h3'); el.textContent = text; return el; }
-function note(text) { const n = document.createElement('div'); n.style.color = 'var(--muted)'; n.textContent = text; return n; }
+// ==================== UTILITIES ====================
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
 
+const state = {
+  proyecto: '',
+  nombre: '',
+  etapas: '',
+  torres: '',
+  tipo: '',
+  unidad: ''
+};
 
-function pageNode(nombre) {
-  const page = document.createElement('div'); page.className = 'pdf-page';
-  const head = document.createElement('div'); head.className = 'brand row-between';
-  head.innerHTML = `<span>Cotización</span><span>${nombre || ''}</span>`;
-  page.appendChild(head); return page;
-}
+// HTML escaping utility
+const escapeHtml = str => {
+  if (!str) return '';
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  return String(str).replace(/[&<>"']/g, m => map[m]);
+};
 
-// version mejorada de sectionNode (usa innerHTML para caption)
-function sectionNode(title, imageUrl, caption) {
-  const sec = document.createElement('div'); sec.className = 'section';
-  sec.appendChild(h3(title));
+// Format currency
+const formatCurrency = value => `$${Number(value).toLocaleString('es-CO')}`;
 
-  const imgBox = document.createElement('div'); imgBox.className = 'imgbox';
+// Wait for images to load
+const waitForImages = container => {
+  const imgs = typeof container === 'string' 
+    ? Array.from($(container + ' img'))
+    : Array.from(container.querySelectorAll('img'));
+  
+  if (!imgs.length) return Promise.resolve();
+  
+  return Promise.all(
+    imgs.map(img => 
+      img.complete 
+        ? Promise.resolve() 
+        : new Promise(res => { img.onload = img.onerror = res; })
+    )
+  );
+};
+
+// Check if one-per-page option is enabled
+const isOnePerPageEnabled = () => {
+  const toggle = $('#opt-one-per-page');
+  return toggle ? Boolean(toggle.checked) : false;
+};
+
+// ==================== VALIDATION FUNCTIONS ====================
+// Sanitize input (remove invalid characters)
+const sanitizeInput = (value, type) => {
+  switch(type) {
+    case 'name':
+      return value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+    case 'phone':
+      return value.replace(/\D/g, '').slice(0, 10);
+    case 'email':
+      return value.replace(/\s/g, '');
+    default:
+      return value;
+  }
+};
+['name', 'email', 'phone'].forEach(type => {
+  const selectorMap = {
+    name: ['#cliente-nombre', '#ejecutivo-nombre'],
+    email: ['#ejecutivo-email'],
+    phone: ['#ejecutivo-cel']
+  };
+
+  selectorMap[type].forEach(sel => {
+    const input = document.querySelector(sel);
+    if (input) {
+      input.addEventListener('input', e => {
+        e.target.value = sanitizeInput(e.target.value, type);
+        validateField(e.target, type);
+      });
+      input.addEventListener('blur', e => validateField(e.target, type));
+      
+    }
+  });
+});
+// Validate field in real-time
+const validateField = (input, type) => {
+  const value = input.value.trim();
+  const rules = VALIDATION_RULES[type];
+  let errorMsg = '';
+
+  switch(type) {
+    case 'name':
+      if (value && !rules.pattern.test(value)) {
+        errorMsg = rules.message;
+      } else if (value.length > rules.maxLength) {
+        errorMsg = `Máximo ${rules.maxLength} caracteres`;
+      }
+      break;
+    
+    case 'email':
+      if (value && !rules.pattern.test(value)) {
+        errorMsg = rules.message;
+      } else if (value.length > rules.maxLength) {
+        errorMsg = `Máximo ${rules.maxLength} caracteres`;
+      }
+      break;
+    
+    case 'phone':
+      if (value && !rules.pattern.test(value)) {
+        errorMsg = rules.message;
+      }
+      break;
+  }
+
+  // Show/hide error message
+  let errorEl = input.parentElement.querySelector('.input-error');
+  if (errorMsg) {
+    if (!errorEl) {
+      errorEl = document.createElement('div');
+      errorEl.className = 'input-error';
+      errorEl.style.color = '#ef4444';
+      errorEl.style.fontSize = '12px';
+      errorEl.style.marginTop = '4px';
+      errorEl.style.marginBottom = '8px';
+      errorEl.textContent = errorMsg;
+      input.parentElement.appendChild(errorEl);
+    } else {
+      errorEl.textContent = errorMsg;
+    }
+    input.style.borderColor = '#ef4444';
+    input.style.background = '#fef2f2';
+    return false;
+  } else {
+    if (errorEl) {
+      errorEl.remove();
+    }
+    input.style.borderColor = '';
+    input.style.background = '';
+    return true;
+  }
+
+  
+};
+
+// ==================== DOM BUILDERS ====================
+const createElement = (tag, props = {}, children = []) => {
+  const el = document.createElement(tag);
+  
+  Object.entries(props).forEach(([key, value]) => {
+    if (key === 'style' && typeof value === 'object') {
+      Object.assign(el.style, value);
+    } else if (key === 'className') {
+      el.className = value;
+    } else if (key === 'innerHTML') {
+      el.innerHTML = value;
+    } else {
+      el[key] = value;
+    }
+  });
+  
+  children.forEach(child => {
+    if (typeof child === 'string') {
+      el.appendChild(document.createTextNode(child));
+    } else if (child) {
+      el.appendChild(child);
+    }
+  });
+  
+  return el;
+};
+
+const createHeading = text => createElement('h3', { textContent: text });
+
+const createNote = text => createElement('div', {
+  style: { color: 'var(--muted)' },
+  textContent: text
+});
+
+const createPageNode = nombre => {
+  const page = createElement('div', { className: 'pdf-page' });
+  const head = createElement('div', {
+    className: 'brand row-between',
+    innerHTML: `<span>Cotización</span><span>${nombre || ''}</span>`
+  });
+  page.appendChild(head);
+  return page;
+};
+
+const createImageBox = (imageUrl, title) => {
+  const imgBox = createElement('div', { className: 'imgbox' });
+  
   if (imageUrl) {
-    const img = document.createElement('img');
-    img.src = imageUrl; img.alt = title;
-    img.onerror = () => { imgBox.innerHTML = '<small style="color:#6b7280">[Sin imagen]</small>'; };
+    const img = createElement('img', { src: imageUrl, alt: title });
+    img.onerror = () => {
+      imgBox.innerHTML = '<small style="color:#6b7280">[Sin imagen]</small>';
+    };
     imgBox.appendChild(img);
   } else {
     imgBox.innerHTML = '<small style="color:#6b7280">[Sin imagen]</small>';
   }
+  
+  return imgBox;
+};
 
-  const p = document.createElement('div');
-  p.className = 'caption';
-  p.style.marginTop = '8px';
-  p.innerHTML = String(caption || '');   // permite <br>
-  sec.appendChild(imgBox);
-  sec.appendChild(p);
-  return sec;
-}
+const createSectionNode = (title, imageUrl, caption) => {
+  const section = createElement('div', { className: 'section' });
+  section.appendChild(createHeading(title));
+  section.appendChild(createImageBox(imageUrl, title));
+  
+  const captionEl = createElement('div', {
+    className: 'caption',
+    style: { marginTop: '8px' },
+    innerHTML: String(caption || '')
+  });
+  
+  section.appendChild(captionEl);
+  return section;
+};
 
-// ---------- NUEVAS PIEZAS: Presentación & Firma ----------
-function presentationNode(conf, proyectoNombre, clienteNombre) {
-  const sec = document.createElement('div');
-  sec.className = 'section';
-
-  // No mostramos el título "Presentación" si no se desea,
-  // el cliente pidió que no sea necesario mostrar la palabra.
-  // Pero mantenemos estructura con logo + texto.
-  const wrapper = document.createElement('div');
-  wrapper.style.display = 'flex';
-  wrapper.style.gap = '18px';
-  wrapper.style.alignItems = 'flex-start';
-
-  // Logo circular pequeño
-  const logoWrap = document.createElement('div');
-  logoWrap.style.width = '120px';
-  logoWrap.style.height = '120px';
-  logoWrap.style.flex = '0 0 120px';
-  logoWrap.style.display = 'flex';
-  logoWrap.style.alignItems = 'center';
-  logoWrap.style.justifyContent = 'center';
-  logoWrap.style.borderRadius = '999px';
-  logoWrap.style.overflow = 'hidden';
-  logoWrap.style.boxShadow = '0 6px 18px rgba(15,23,42,0.08)';
-  logoWrap.style.background = '#fff';
+// ==================== PRESENTATION & SIGNATURE ====================
+const createPresentationNode = (conf, proyectoNombre, clienteNombre) => {
+  const logoWrap = createElement('div', {
+    style: {
+      width: '120px',
+      height: '120px',
+      flex: '0 0 120px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: '999px',
+      overflow: 'hidden',
+      boxShadow: '0 6px 18px rgba(15,23,42,0.08)',
+      background: '#fff'
+    }
+  });
 
   if (conf.presentacion?.img) {
-    const img = document.createElement('img');
-    img.src = conf.presentacion.img;
-    img.alt = proyectoNombre + ' logo';
-    img.style.maxWidth = '90%';
-    img.style.maxHeight = '90%';
-    img.onerror = () => { logoWrap.innerHTML = '<small style="color:#6b7280">[Sin imagen]</small>'; };
+    const img = createElement('img', {
+      src: conf.presentacion.img,
+      alt: `${proyectoNombre} logo`,
+      style: { maxWidth: '90%', maxHeight: '90%' }
+    });
+    img.onerror = () => {
+      logoWrap.innerHTML = '<small style="color:#6b7280">[Sin logo]</small>';
+    };
     logoWrap.appendChild(img);
   } else {
     logoWrap.innerHTML = '<small style="color:#6b7280">[Sin logo]</small>';
   }
 
-  // Texto formateado
-  const txt = document.createElement('div');
-  txt.style.flex = '1 1 auto';
-  txt.style.fontSize = '14px';
-  txt.style.lineHeight = '1.45';
-  txt.innerHTML = `
-    <div style="font-weight:700; margin-bottom:8px;">Bienvenido Señor(a) ${escapeHtml(clienteNombre)}</div>
-    <div style="font-weight:600; margin-bottom:6px;">Descubre ${escapeHtml(proyectoNombre)}, el primer proyecto de vivienda en Ciudad Viva</div>
-    <div style="margin-bottom:10px;">Vive en un apartamento con club exclusivo y espacios premium</div>
-    <div style="color:var(--muted);">${conf.presentacion?.caption && typeof conf.presentacion.caption === 'function' 
-      ? conf.presentacion.caption(proyectoNombre)
-      : (conf.presentacion?.caption || '')}</div>
-  `;
-  wrapper.appendChild(logoWrap);
-  wrapper.appendChild(txt);
+  const captionText = conf.presentacion?.caption && typeof conf.presentacion.caption === 'function'
+    ? conf.presentacion.caption(proyectoNombre)
+    : (conf.presentacion?.caption || '');
 
-  sec.appendChild(wrapper);
-  return sec;
-}
+  const txt = createElement('div', {
+    style: { flex: '1 1 auto', fontSize: '14px', lineHeight: '1.45' },
+    innerHTML: `
+      <div style="font-weight:700; margin-bottom:8px;">Bienvenido Señor(a) ${escapeHtml(clienteNombre)}</div>
+      <div style="font-weight:600; margin-bottom:6px;">Descubre ${escapeHtml(proyectoNombre)}, el primer proyecto de vivienda en Ciudad Viva</div>
+      <div style="margin-bottom:10px;">Vive en un apartamento con club exclusivo y espacios premium</div>
+      <div style="color:var(--muted);">${captionText}</div>
+    `
+  });
 
-function signatureNode(exec) {
-  const sec = document.createElement('div');
-  sec.className = 'section';
-  sec.style.marginTop = '18px';
+  const wrapper = createElement('div', {
+    style: { display: 'flex', gap: '18px', alignItems: 'flex-start' }
+  }, [logoWrap, txt]);
 
-  // aquí no ponemos título grande, lo dejamos como elemento tipo firma visual
-  const wrapOuter = document.createElement('div');
-  wrapOuter.style.display = 'flex';
-  wrapOuter.style.alignItems = 'center';
-  wrapOuter.style.gap = '16px';
-  wrapOuter.style.padding = '12px';
-  wrapOuter.style.borderRadius = '12px';
-  wrapOuter.style.background = '#fff'; // mantiene contraste con la section
-  wrapOuter.style.boxShadow = '0 4px 14px rgba(2,6,23,0.04)';
-  wrapOuter.style.border = '1px solid var(--stroke)';
+  return createElement('div', { className: 'section' }, [wrapper]);
+};
 
-  const photo = document.createElement('div');
-  photo.style.width = '72px';
-  photo.style.height = '72px';
-  photo.style.borderRadius = '8px';
-  photo.style.overflow = 'hidden';
-  photo.style.display = 'flex';
-  photo.style.alignItems = 'center';
-  photo.style.justifyContent = 'center';
-  photo.style.background = '#f3f4f6';
+const createSignatureNode = exec => {
+  const photo = createElement('div', {
+    style: {
+      width: '72px',
+      height: '72px',
+      borderRadius: '8px',
+      overflow: 'hidden',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: '#f3f4f6'
+    }
+  });
 
   if (exec.photoURL) {
-    const img = document.createElement('img');
-    img.src = exec.photoURL;
-    img.alt = exec.name || 'Foto ejecutivo';
-    img.style.width = '100%';
-    img.style.height = '100%';
-    img.style.objectFit = 'cover';
+    const img = createElement('img', {
+      src: exec.photoURL,
+      alt: exec.name || 'Foto ejecutivo',
+      style: { width: '100%', height: '100%', objectFit: 'cover' }
+    });
     photo.appendChild(img);
   } else {
-    photo.innerHTML = `<div style="padding:6px;color:var(--muted);font-size:12px;text-align:center">No hay foto</div>`;
+    photo.innerHTML = '<div style="padding:6px;color:var(--muted);font-size:12px;text-align:center">No hay foto</div>';
   }
 
-  const info = document.createElement('div');
-  info.style.display = 'flex';
-  info.style.flexDirection = 'column';
-  info.style.gap = '6px';
-  info.style.fontSize = '14px';
-  info.style.color = 'var(--text)';
+  const info = createElement('div', {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '6px',
+      fontSize: '14px',
+      color: 'var(--text)'
+    },
+    innerHTML: `
+      <div style="font-weight:700">${escapeHtml(exec.name || '')}</div>
+      <div style="color:var(--muted);font-size:13px">
+        Para mayor información, por favor contacte al ejecutivo al número <strong>${escapeHtml(exec.cel || '')}</strong>
+      </div>
+      <div style="color:var(--muted);font-size:13px">${escapeHtml(exec.email || '')}</div>
+    `
+  });
 
-  const nombreEl = document.createElement('div');
-  nombreEl.style.fontWeight = '700';
-  nombreEl.textContent = exec.name || '';
+  const wrapper = createElement('div', {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '16px',
+      padding: '12px',
+      borderRadius: '12px',
+      background: '#fff',
+      boxShadow: '0 4px 14px rgba(2,6,23,0.04)',
+      border: '1px solid var(--stroke)'
+    }
+  }, [photo, info]);
 
-  const lineaContacto = document.createElement('div');
-  lineaContacto.style.color = 'var(--muted)';
-  lineaContacto.style.fontSize = '13px';
-  // texto fijo + celular dinámico
-  lineaContacto.innerHTML = `Para mayor información, por favor contacte al ejecutivo al número <strong>${escapeHtml(exec.cel || '')}</strong>`;
+  return createElement('div', {
+    className: 'section',
+    style: { marginTop: '18px' }
+  }, [wrapper]);
+};
 
-  const correoEl = document.createElement('div');
-  correoEl.style.color = 'var(--muted)';
-  correoEl.style.fontSize = '13px';
-  correoEl.textContent = exec.email || '';
+// ==================== SECTION BUILDERS ====================
+const createActivitiesSection = actividades => {
+  const section = createElement('div', { className: 'section' });
+  section.appendChild(createHeading('Actividades del proyecto'));
 
-  info.appendChild(nombreEl);
-  info.appendChild(lineaContacto);
-  info.appendChild(correoEl);
+  if (!actividades.length) {
+    section.appendChild(createNote('Sin actividades registradas.'));
+    return section;
+  }
 
-  wrapOuter.appendChild(photo);
-  wrapOuter.appendChild(info);
+  const table = createElement('table');
+  table.innerHTML = '<thead><tr><th>Zona</th><th>Estado</th></tr></thead>';
+  
+  const tbody = createElement('tbody');
+  actividades.forEach(a => {
+    const nombre = a.actividad ?? a.Zona ?? '';
+    const estado = a.estado ?? '';
+    const tr = createElement('tr', {
+      innerHTML: `<td>${escapeHtml(nombre)}</td><td>${escapeHtml(estado)}</td>`
+    });
+    tbody.appendChild(tr);
+  });
+  
+  table.appendChild(tbody);
+  section.appendChild(table);
+  return section;
+};
 
-  sec.appendChild(wrapOuter);
-  return sec;
-}
+const createCotizacionSection = conf => {
+  const section = createElement('div', { className: 'section' });
+  section.appendChild(createHeading('Cotización Detallada'));
 
+  const d = conf.cotizacionDet || {};
+  const {
+    valorApartamento = 0,
+    beneficioPrograma = '',
+    valorHoy = valorApartamento,
+    cuotaInicialPct = 30,
+    separacion = 0,
+    meses = 0,
+    cuotaMensual = 0,
+    lineaProducto = '',
+    vigenciaTexto = '—'
+  } = d;
 
-// simple escape to avoid inyectar HTML desde inputs
-function escapeHtml(s) {
-  if (!s) return '';
-  return String(s).replace(/[&<>"']/g, function (m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
-}
+  const cuotaInicial = Math.round(valorApartamento * cuotaInicialPct / 100);
 
-// Espera a que las imgs dentro de selector estén cargadas
-function waitForImages(containerSelector) {
-  const imgs = Array.from(document.querySelectorAll(`${containerSelector} img`));
-  if (!imgs.length) return Promise.resolve();
-  return Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(res => { img.onload = img.onerror = res; })));
-}
+  section.innerHTML += `
+    <table class="styled">
+      <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td>Valor del apartamento</td><td>${formatCurrency(valorApartamento)}</td></tr>
+        <tr><td>Beneficio programa</td><td>${beneficioPrograma || '-'}</td></tr>
+        <tr><td>Valor al día de hoy</td><td>${formatCurrency(valorHoy)}</td></tr>
+        <tr><td>Valor cuota inicial (${cuotaInicialPct}%)</td><td>${formatCurrency(cuotaInicial)}</td></tr>
+        <tr><td>Separación</td><td>${formatCurrency(separacion)}</td></tr>
+      </tbody>
+    </table>
+    <br>
+    <table class="styled">
+      <thead><tr><th>Valor cuota mensual (meses)</th><th>Detalle</th></tr></thead>
+      <tbody>
+        <tr><td>${meses || '-'}</td><td>${formatCurrency(cuotaMensual)} (${escapeHtml(lineaProducto)})</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;color:var(--muted)">Esta cotización tiene vigencia de ${vigenciaTexto}</p>
+    <br>
+    <h4>Cotización Moneda extranjera</h4>
+    <table class="styled">
+      <thead><tr><th>Moneda</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td>Valor de la inversión</td><td>$104.651</td></tr>
+        <tr><td>Cuota de separación</td><td>$233</td></tr>
+        <tr><td>Valor cuota inicial</td><td>$31.395</td></tr>
+        <tr><td>Valor final</td><td>$73.256</td></tr>
+        <tr><td><b>Valor cuota mensual</b></td><td><b>$452</b></td></tr>
+      </tbody>
+    </table>
+    <br>
+    <h4>Datos financieros</h4>
+    <table class="styled">
+      <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td>Valor</td><td>$315.000.000</td></tr>
+        <tr><td>Tasa de interés anual</td><td>10.5%</td></tr>
+        <tr><td>Años de financiamiento</td><td>20</td></tr>
+        <tr><td><b>Cuota bancaria estimada</b></td><td><b>$3.144.897</b></td></tr>
+      </tbody>
+    </table>
+  `;
 
-function onePerPageEnabled() {
-  const newToggle = document.getElementById('opt-one-per-page');
-  if (newToggle) return Boolean(newToggle.checked);
-  const old = document.getElementById('chk-per-page');
-  return old ? Boolean(old.checked) : false;
-}
-// ---------- Flujo escalonado (igual que antes, con los mismos IDs) ----------
-// Paso 1: Buscar proyecto (limpia estado)
-$('#btn-buscar').addEventListener('click', () => {
-  // Limpiar estado global
-  state.proyecto = ''; state.nombre = ''; state.etapas = ''; state.torres = ''; state.tipo = ''; state.unidad = '';
+  return section;
+};
 
-  // Limpiar selects y UI
+// ==================== FORM VALIDATION ====================
+const validateForm = () => {
+  const fields = {
+    nombreCliente: $('#cliente-nombre')?.value.trim() || '',
+    nombreEjecutivo: $('#ejecutivo-nombre')?.value.trim() || '',
+    emailEjecutivo: $('#ejecutivo-email')?.value.trim() || '',
+    celEjecutivo: $('#ejecutivo-cel')?.value.trim() || ''
+  };
+
+  const validations = [
+    { field: 'nombreCliente', message: 'Por favor completa el nombre del cliente antes de generar la cotización.', element: '#cliente-nombre' },
+    { field: 'nombreEjecutivo', message: 'Por favor completa el nombre del ejecutivo antes de generar la cotización.', element: '#ejecutivo-nombre' },
+    { field: 'emailEjecutivo', message: 'Por favor completa el email del ejecutivo antes de generar la cotización.', element: '#ejecutivo-email' },
+    { field: 'celEjecutivo', message: 'Por favor completa el celular del ejecutivo antes de generar la cotización.', element: '#ejecutivo-cel' }
+  ];
+
+  for (const validation of validations) {
+    if (!fields[validation.field]) {
+      alert(validation.message);
+      $(validation.element)?.focus();
+      return null;
+    }
+  }
+
+  return fields;
+};
+
+// ==================== UI HELPERS ====================
+const resetState = () => {
+  Object.keys(state).forEach(key => state[key] = '');
+  
   $('#sel-etapas').value = '';
   $('#sel-torres').value = '';
   $('#sel-tipo').value = '';
   $('#sel-unidad').innerHTML = '';
   $('#wrap-unidad').classList.add('hidden');
+  
   ['#step-etapas', '#step-torres', '#step-tipo', '#step-contenido'].forEach(sel => {
-    const el = $(sel);
-    if (el) el.classList.add('hidden');
+    $(sel)?.classList.add('hidden');
   });
+  
+  $$('#step-contenido input[type="checkbox"]').forEach(chk => chk.checked = false);
+};
 
-  // Desmarcar checks (si los tienes)
-  document.querySelectorAll('#step-contenido input[type="checkbox"]').forEach(chk => chk.checked = false);
-
-  // Limpia preview
-  const pdf = document.getElementById('pdf');
+const resetPreview = () => {
+  const pdf = $('#pdf');
   pdf.innerHTML = `
     <div class="pdf-page">
       <div class="brand row-between">
@@ -284,286 +572,161 @@ $('#btn-buscar').addEventListener('click', () => {
       </div>
     </div>
   `;
+};
 
-  const proyecto = $('#sel-proyecto').value;
-  if (!proyecto) { alert('Selecciona un proyecto'); return; }
+const showStep = stepId => {
+  const step = $(stepId);
+  if (step) {
+    step.classList.remove('hidden');
+    step.classList.add('revealed');
+    step.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+};
 
-  state.proyecto = proyecto;
-  state.nombre = proyecto;
-  $('#pdf-nombre').textContent = proyecto;
-
-  const s = $('#step-etapas');
-  s.classList.remove('hidden'); s.classList.add('revealed');
-  s.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-});
-
-// Paso 2+: manejos de selects (igual que antes)
-$('#sel-etapas').addEventListener('change', (e) => {
-  state.etapas = e.target.value || '';
-  if (!state.etapas) return;
-  const s = $('#step-torres'); s.classList.remove('hidden'); s.classList.add('revealed'); s.scrollIntoView({ behavior:'smooth', block:'nearest' });
-});
-$('#sel-torres').addEventListener('change', (e) => {
-  state.torres = e.target.value || '';
-  if (!state.torres) return;
-  const s = $('#step-tipo'); s.classList.remove('hidden'); s.classList.add('revealed'); s.scrollIntoView({ behavior:'smooth', block:'nearest' });
-});
-$('#sel-tipo').addEventListener('change', (e) => {
-  state.tipo = e.target.value || '';
-  const wrap = $('#wrap-unidad'); const selUnidad = $('#sel-unidad');
-  if (!state.tipo) { wrap.classList.add('hidden'); return; }
-  selUnidad.innerHTML = ''; const opts = UNIDADES[state.tipo] || [];
-  selUnidad.append(new Option('— Seleccionar —', ''));
-  const prefijos = (state.torres === '2') ? ['Torre A ', 'Torre B '] : [''];
-  prefijos.forEach(pref => opts.forEach(u => selUnidad.append(new Option(pref + u, pref + u))));
+const populateUnidades = () => {
+  const wrap = $('#wrap-unidad');
+  const selUnidad = $('#sel-unidad');
+  
+  if (!state.tipo) {
+    wrap.classList.add('hidden');
+    return;
+  }
+  
+  selUnidad.innerHTML = '';
+  const opts = UNIDADES[state.tipo] || [];
+  selUnidad.appendChild(new Option('— Seleccionar —', ''));
+  
+  const prefijos = state.torres === '2' ? ['Torre A ', 'Torre B '] : [''];
+  prefijos.forEach(pref => {
+    opts.forEach(u => selUnidad.appendChild(new Option(pref + u, pref + u)));
+  });
+  
   wrap.classList.remove('hidden');
-});
-$('#sel-unidad').addEventListener('change', (e) => {
-  state.unidad = e.target.value || '';
-  if (!state.unidad) return;
-  const s = $('#step-contenido'); s.classList.remove('hidden'); s.classList.add('revealed'); s.scrollIntoView({ behavior:'smooth', block:'nearest' });
-});
+};
 
-// ---------- Generar vista (sección 3) ----------
-// Ahora: SE OBLIGA que cliente y ejecutivo estén completos.
-$('#btn-generar').addEventListener('click', () => {
-  // Validaciones: cliente + ejecutivo
-  const nombreCliente = ($('#cliente-nombre') && $('#cliente-nombre').value.trim()) || '';
-  const nombreEjecutivo = ($('#ejecutivo-nombre') && $('#ejecutivo-nombre').value.trim()) || '';
-  const emailEjecutivo = ($('#ejecutivo-email') && $('#ejecutivo-email').value.trim()) || '';
-  const celEjecutivo = ($('#ejecutivo-cel') && $('#ejecutivo-cel').value.trim()) || '';
-
-  if (!nombreCliente) {
-    alert('Por favor completa el nombre del cliente antes de generar la cotización.');
-    $('#cliente-nombre').focus();
-    return;
-  }
-  if (!nombreEjecutivo) {
-    alert('Por favor completa el nombre del ejecutivo antes de generar la cotización.');
-    $('#ejecutivo-nombre').focus();
-    return;
-  }
-  if (!emailEjecutivo) {
-    alert('Por favor completa el email del ejecutivo antes de generar la cotización.');
-    $('#ejecutivo-email').focus();
-    return;
-  }
-  if (!celEjecutivo) {
-    alert('Por favor completa el celular del ejecutivo antes de generar la cotización.');
-    $('#ejecutivo-cel').focus();
-    return;
-  }
-
-  // Comprobamos selección de proyecto/etapas/...
-  if (!state.proyecto || !state.etapas || !state.torres || !state.tipo || !state.unidad) {
-    alert('Completa proyecto, etapas, torres, tipo y unidad antes de generar.');
-    return;
-  }
-
-  const conf = CONFIG[state.proyecto] || {};
-  const pdf = document.getElementById('pdf');
-  pdf.innerHTML = ''; // reset
-  const blocks = [];
-
-  // 1) Presentación SIEMPRE (primero) - usa cliente y proyecto
-  blocks.push(presentationNode(conf, state.nombre, nombreCliente));
-
-
-  // 3) Ubicación del proyecto (si chequeado)
-  if ($('#chk-ubi-proy') && $('#chk-ubi-proy').checked) {
-    blocks.push(sectionNode('Ubicación del proyecto', conf.ubicacionProy?.img, conf.ubicacionProy?.caption || ''));
-  }
-
-  // 4) Actividades
-  if ($('#chk-actividades') && $('#chk-actividades').checked) {
-    const sec = document.createElement('div'); sec.className = 'section';
-    sec.appendChild(h3('Actividades del proyecto'));
-    const actividades = conf.actividades || [];
-    if (actividades.length === 0) sec.appendChild(note('Sin actividades registradas.'));
-    else {
-      const table = document.createElement('table');
-      table.innerHTML = '<thead><tr><th>Zona</th><th>Estado</th></tr></thead>';
-      const tb = document.createElement('tbody');
-      actividades.forEach(a => {
-        const nombre = a.actividad ?? a.Zona ?? '';
-        const estado = a.estado ?? '';
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${escapeHtml(nombre)}</td><td>${escapeHtml(estado)}</td>`;
-        tb.appendChild(tr);
-      });
-      table.appendChild(tb); sec.appendChild(table);
-    }
-    blocks.push(sec);
-  }
-
-  // 5) Ubicación del apartamento
-  if ($('#chk-ubi-apto') && $('#chk-ubi-apto').checked) {
-    blocks.push(sectionNode('Ubicación del apartamento', conf.ubicacionApto?.img, conf.ubicacionApto?.caption || ''));
-  }
-
-  // 6) Cotización (tabla detallada) - si está chequeado
-  if ($('#chk-cotizacion') && $('#chk-cotizacion').checked) {
-    const sec = document.createElement('div'); sec.className = 'section';
-    sec.appendChild(h3('Cotización Detallada'));
-
-    // tratando de preferir los valores desde conf.cotizacionDet si existen
-    const d = conf.cotizacionDet || {};
-    const valorApartamento = d.valorApartamento ?? 0;
-    const beneficioPrograma = d.beneficioPrograma ?? '';
-    const valorHoy = d.valorHoy ?? valorApartamento;
-    const cuotaInicialPct = d.cuotaInicialPct ?? 30;
-    const separacion = d.separacion ?? 0;
-    const meses = d.meses ?? 0;
-    const cuotaMensual = d.cuotaMensual ?? 0;
-    const lineaProducto = d.lineaProducto ?? '';
-
-    // tabla principal (HTML string para mantener diseño)
-    sec.innerHTML += `
-      <table class="styled">
-        <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
-        <tbody>
-          <tr><td>Valor del apartamento</td><td>$${Number(valorApartamento).toLocaleString('es-CO')}</td></tr>
-          <tr><td>Beneficio programa</td><td>${beneficioPrograma || '-'}</td></tr>
-          <tr><td>Valor al día de hoy</td><td>$${Number(valorHoy).toLocaleString('es-CO')}</td></tr>
-          <tr><td>Valor cuota inicial (${cuotaInicialPct}%)</td><td>$${Math.round(valorApartamento * cuotaInicialPct/100).toLocaleString('es-CO')}</td></tr>
-          <tr><td>Separación</td><td>$${Number(separacion).toLocaleString('es-CO')}</td></tr>
-        </tbody>
-      </table>
-      <br>
-      <table class="styled">
-        <thead><tr><th>Valor cuota mensual (meses)</th><th>Detalle</th></tr></thead>
-        <tbody>
-          <tr><td>${meses || '-'}</td><td>$${Number(cuotaMensual).toLocaleString('es-CO')} (${escapeHtml(lineaProducto)})</td></tr>
-        </tbody>
-      </table>
-      <p style="margin-top:10px;color:var(--muted)">Esta cotización tiene vigencia de ${d.vigenciaTexto || '—'}</p>
-    `;
-    // Moneda extranjera y financieros como en tu ejemplo
-    sec.innerHTML += `
-      <br>
-      <h4>Cotización Moneda extranjera</h4>
-      <table class="styled">
-        <thead><tr><th>Moneda</th><th>Valor</th></tr></thead>
-        <tbody>
-          <tr><td>Valor de la inversión</td><td>$104.651</td></tr>
-          <tr><td>Cuota de separación</td><td>$233</td></tr>
-          <tr><td>Valor cuota inicial</td><td>$31.395</td></tr>
-          <tr><td>Valor final</td><td>$73.256</td></tr>
-          <tr><td><b>Valor cuota mensual</b></td><td><b>$452</b></td></tr>
-        </tbody>
-      </table>
-      <br>
-      <h4>Datos financieros</h4>
-      <table class="styled">
-        <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
-        <tbody>
-          <tr><td>Valor</td><td>$315.000.000</td></tr>
-          <tr><td>Tasa de interés anual</td><td>10.5%</td></tr>
-          <tr><td>Años de financiamiento</td><td>20</td></tr>
-          <tr><td><b>Cuota bancaria estimada</b></td><td><b>$3.144.897</b></td></tr>
-        </tbody>
-      </table>
-    `;
-    blocks.push(sec);
-  }
-
-  // 7) Finalmente: firma del ejecutivo (SIEMPRE)
-  // obtenemos los datos del formulario
+// ==================== CONTENT GENERATION ====================
+const getExecutiveData = () => {
   const execFileInput = $('#ejecutivo-foto');
   let photoURL = null;
-  if (execFileInput && execFileInput.files && execFileInput.files[0]) {
+  
+  if (execFileInput?.files?.[0]) {
     photoURL = URL.createObjectURL(execFileInput.files[0]);
   }
-  const execData = {
-    name: nombreEjecutivo,
-    email: emailEjecutivo,
-    cel: celEjecutivo,
-    photoURL: photoURL
+  
+  return {
+    name: $('#ejecutivo-nombre').value.trim(),
+    email: $('#ejecutivo-email').value.trim(),
+    cel: $('#ejecutivo-cel').value.trim(),
+    photoURL
   };
+};
 
-  // montaje final: colocamos bloques en la página(s)
-const onePerPage = onePerPageEnabled();
-  if (onePerPage) {
-    blocks.forEach(b => {
-      const p = pageNode(state.nombre);
-      p.appendChild(b);
-      // si b es la última (firma) la añadimos al final; aquí ya está en orden
-      pdf.appendChild(p);
+const generateBlocks = (conf, nombreCliente) => {
+  const blocks = [];
+  
+  // 1. Presentación (always first)
+  blocks.push(createPresentationNode(conf, state.nombre, nombreCliente));
+  
+  // 2. Ubicación del proyecto
+  if ($('#chk-ubi-proy')?.checked) {
+    blocks.push(createSectionNode(
+      'Ubicación del proyecto',
+      conf.ubicacionProy?.img,
+      conf.ubicacionProy?.caption || ''
+    ));
+  }
+  
+  // 3. Actividades
+  if ($('#chk-actividades')?.checked) {
+    blocks.push(createActivitiesSection(conf.actividades || []));
+  }
+  
+  // 4. Ubicación del apartamento
+  if ($('#chk-ubi-apto')?.checked) {
+    blocks.push(createSectionNode(
+      'Ubicación del apartamento',
+      conf.ubicacionApto?.img,
+      conf.ubicacionApto?.caption || ''
+    ));
+  }
+  
+  // 5. Cotización
+  if ($('#chk-cotizacion')?.checked) {
+    blocks.push(createCotizacionSection(conf));
+  }
+  
+  return blocks;
+};
+
+const renderPDF = (blocks, execData) => {
+  const pdf = $('#pdf');
+  pdf.innerHTML = '';
+  
+  const signSec = createSignatureNode(execData);
+  
+  if (isOnePerPageEnabled()) {
+    // Each block on separate page
+    blocks.forEach(block => {
+      const page = createPageNode(state.nombre);
+      page.appendChild(block);
+      pdf.appendChild(page);
     });
-    // añadimos firma como página extra si no la incluyó en bloques (la incluimos ahora)
-    const signSec = signatureNode(execData);
-    // si quieres que la firma vaya en la misma página final en lugar de nueva página:
-    // la insertamos en la última `pdf-page`:
+    
+    // Signature on last page
     const lastPage = pdf.querySelector('.pdf-page:last-child');
-    if (lastPage) lastPage.appendChild(signSec);
-    else {
-      const p2 = pageNode(state.nombre);
-      p2.appendChild(signSec);
-      pdf.appendChild(p2);
+    if (lastPage) {
+      lastPage.appendChild(signSec);
+    } else {
+      const page = createPageNode(state.nombre);
+      page.appendChild(signSec);
+      pdf.appendChild(page);
     }
   } else {
-    const p = pageNode(state.nombre);
-    blocks.forEach(b => p.appendChild(b));
-    // firma al final en la misma página
-    p.appendChild(signatureNode(execData));
-    pdf.appendChild(p);
+    // All blocks on one page
+    const page = createPageNode(state.nombre);
+    blocks.forEach(block => page.appendChild(block));
+    page.appendChild(signSec);
+    pdf.appendChild(page);
+  }
+  
+  // Store photoURL in state for later cleanup (don't revoke immediately)
+  state.currentPhotoURL = execData.photoURL;
+};
+
+// ==================== PDF EXPORT ====================
+const exportToPDF = async () => {
+  const pdfDoc = $('#pdf');
+  if (!pdfDoc) {
+    alert('No se encontró el contenedor de previsualización.');
+    return;
   }
 
-  // Si creamos un objectURL para la foto, revocar después (evitar fuga)
-  if (photoURL) {
-    // revoke when image loads or after small timeout
-    setTimeout(() => URL.revokeObjectURL(photoURL), 5000);
-  }
+  // Create offscreen container
+  const offscreen = createElement('div', {
+    style: {
+      position: 'fixed',
+      left: '-99999px',
+      top: '0',
+      width: '210mm',
+      height: 'auto',
+      overflow: 'hidden',
+      background: '#fff'
+    }
+  });
+  offscreen.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(offscreen);
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ===== Exportar a PDF (igual que antes, con small tweaks) =====
-// Reemplaza tu listener actual por este bloque.
-// Genera el PDF a partir de un CLON offscreen para evitar mover la UI.
-document.getElementById('btn-descargar').addEventListener('click', async () => {
-  const pdfDoc = document.getElementById('pdf');
-  if (!pdfDoc) return alert('No se encontró el contenedor de previsualización.');
-
-  // crea un contenedor offscreen (fuera de pantalla)
-  const off = document.createElement('div');
-  off.setAttribute('aria-hidden','true');
-  off.style.position = 'fixed';
-  off.style.left = '-99999px';
-  off.style.top = '0';
-  off.style.width = '210mm';         // ancho A4 exacto para html2pdf
-  off.style.height = 'auto';
-  off.style.overflow = 'hidden';
-  off.style.background = '#fff';
-  document.body.appendChild(off);
-
-  // clona el contenido del preview (deep clone)
   const clone = pdfDoc.cloneNode(true);
-  // si quieres forzar la clase de export para el clone (opcional)
   clone.classList.add('__export');
 
-  // método helper local para esperar imgs dentro del nodo clon
-  function waitImagesInNode(node) {
-    const imgs = Array.from(node.querySelectorAll('img'));
-    if (!imgs.length) return Promise.resolve();
-    return Promise.all(imgs.map(img => {
-      if (img.complete) return Promise.resolve();
-      return new Promise(res => { img.onload = img.onerror = res; });
-    }));
-  }
-
   try {
-    // inserta clon en el contenedor offscreen
-    off.appendChild(clone);
+    offscreen.appendChild(clone);
+    await waitForImages(offscreen);
 
-    // espera que las imgs del clon se carguen
-    await waitImagesInNode(clone);
-
-    // opciones html2pdf (igual que usabas)
     const isFile = location.protocol === 'file:';
-    const opt = {
+    const options = {
       margin: [0, 0, 0, 0],
-      filename: (state.nombre ? state.nombre + ' - cotizacion' : 'cotizacion') + '.pdf',
+      filename: `${state.nombre || 'cotizacion'} - cotizacion.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {
         scale: 3,
@@ -571,30 +734,99 @@ document.getElementById('btn-descargar').addEventListener('click', async () => {
         useCORS: !isFile,
         allowTaint: false,
         scrollX: 0,
-        scrollY: 0
+        scrollY: 0,
+        logging: true
       },
       pagebreak: { mode: ['css', 'legacy'], avoid: '.section' },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
-    // generar y descargar PDF a partir del CLON
-    await html2pdf().set(opt).from(clone).save();
+    await html2pdf().set(options).from(clone).save();
   } catch (err) {
-    console.error('Error exportando PDF (clon):', err);
-    alert('No se pudo generar el PDF. Revisa la consola (F12).');
+    console.error('Error exportando PDF:', err);
+    console.error('Stack:', err.stack);
+    alert('No se pudo generar el PDF. Error: ' + err.message + '\nRevisa la consola (F12) para más detalles.');
   } finally {
-    // limpieza: revocar object URLs si existen imgs con objectURL
-    // (no obligatorio aquí, pero seguro)
-    const imgs = off.querySelectorAll('img');
-    imgs.forEach(img => {
-      if (img.src && img.src.startsWith('blob:')) {
+    // Cleanup
+    offscreen.querySelectorAll('img').forEach(img => {
+      if (img.src?.startsWith('blob:')) {
         try { URL.revokeObjectURL(img.src); } catch(e) {}
       }
     });
-
-    // quitar contenedor offscreen
-    if (off && off.parentNode) off.parentNode.removeChild(off);
+    
+    offscreen.parentNode?.removeChild(offscreen);
   }
-});
+};
 
+// ==================== EVENT HANDLERS ====================
+const handleBuscar = () => {
+  resetState();
+  resetPreview();
+
+  const proyecto = $('#sel-proyecto').value;
+  if (!proyecto) {
+    alert('Selecciona un proyecto');
+    return;
+  }
+
+  state.proyecto = proyecto;
+  state.nombre = proyecto;
+  $('#pdf-nombre').textContent = proyecto;
+  
+  showStep('#step-etapas');
+};
+
+const handleEtapasChange = e => {
+  state.etapas = e.target.value || '';
+  if (state.etapas) showStep('#step-torres');
+};
+
+const handleTorresChange = e => {
+  state.torres = e.target.value || '';
+  if (state.torres) showStep('#step-tipo');
+};
+
+const handleTipoChange = e => {
+  state.tipo = e.target.value || '';
+  populateUnidades();
+};
+
+const handleUnidadChange = e => {
+  state.unidad = e.target.value || '';
+  if (state.unidad) showStep('#step-contenido');
+};
+
+const handleGenerar = () => {
+  // Validate form
+  const formData = validateForm();
+  if (!formData) return;
+
+  // Validate project selection
+  if (!state.proyecto || !state.etapas || !state.torres || !state.tipo || !state.unidad) {
+    alert('Completa proyecto, etapas, torres, tipo y unidad antes de generar.');
+    return;
+  }
+
+  const conf = CONFIG[state.proyecto] || {};
+  const blocks = generateBlocks(conf, formData.nombreCliente);
+  const execData = getExecutiveData();
+  
+  renderPDF(blocks, execData);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// ==================== INITIALIZATION ====================
+const init = () => {
+  $('#btn-buscar').addEventListener('click', handleBuscar);
+  $('#sel-etapas').addEventListener('change', handleEtapasChange);
+  $('#sel-torres').addEventListener('change', handleTorresChange);
+  $('#sel-tipo').addEventListener('change', handleTipoChange);
+  $('#sel-unidad').addEventListener('change', handleUnidadChange);
+  $('#btn-generar').addEventListener('click', handleGenerar);
+  $('#btn-descargar').addEventListener('click', exportToPDF);
+};
+
+
+// Start the application
+init();
 
